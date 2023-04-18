@@ -42,7 +42,7 @@ stores=[
 # By default route requets are GET in nature
 @app.route("/")
 def home():
-    return jsonify("Hello")
+    return jsonify("Hello Hi")
 
 # / is the index route or home route
 @app.route("/store",methods=["POST"])
