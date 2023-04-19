@@ -6,7 +6,7 @@
 # 5. HEAD AND MUCH MORE
 
 from flask import Flask,jsonify,request
-
+import git
 # Created an Object of Flask with a unique name
 app=Flask(__name__)  
 
@@ -38,6 +38,17 @@ stores=[
         ]
     }
 ]
+
+@app.route('/update_server', methods=['POST'])
+def webhook():
+  if request.method == 'POST':
+    repo = git.Repo('./Dummy-app')
+    origin = repo.remotes.origin
+    repo.create_head('main',origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+    origin.pull()
+    return 'Updated PythonAnywhere successfully', 200
+
+
 
 # By default route requets are GET in nature
 @app.route("/")
