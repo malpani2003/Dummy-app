@@ -60,7 +60,7 @@ def webhook():
 # By default route requets are GET in nature
 @app.route("/")
 def home():
-    return jsonify("Hello From try code")
+    return jsonify("Hello")
 
 # / is the index route or home route
 @app.route("/store",methods=["POST"])
