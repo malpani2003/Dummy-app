@@ -42,7 +42,8 @@ stores=[
 @app.route('/update_server', methods=['POST'])
 def webhook():
   if request.method == 'POST':
-    repo = git.Repo('./Dummy-app')
+    # repo = git.Repo('./Dummy-app')
+    repo = git.Repo('/home/Pranav2003/Dummy-app')
     origin = repo.remotes.origin
     repo.create_head('main',origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
     origin.pull()
@@ -50,10 +51,11 @@ def webhook():
 
 
 
+
 # By default route requets are GET in nature
 @app.route("/")
 def home():
-    return jsonify("Hello , Pranav Malpani")
+    return jsonify("Hello , Pranav Malpani Here")
 
 # / is the index route or home route
 @app.route("/store",methods=["POST"])
