@@ -39,18 +39,30 @@ stores=[
     }
 ]
 
+# @app.route('/update_server', methods=['POST'])
+# def webhook():
+#   if request.method == 'POST':
+#     # repo = git.Repo('./Dummy-app')
+#     repo = git.Repo('/home/Pranav2003/Dummy-app')
+#     origin = repo.remotes.origin
+#     # repo.create_head('main',origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+#     origin.pull()
+#     return 'Updated PythonAnywhere successfully', 200
+
+
+
 @app.route('/update_server', methods=['POST'])
 def webhook():
   if request.method == 'POST':
-    # repo = git.Repo('./Dummy-app')
     repo = git.Repo('/home/Pranav2003/Dummy-app')
-    origin = repo.remotes.origin
-    repo.create_head('main',origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
-    origin.pull()
-    return 'Updated PythonAnywhere successfully', 200
-
-
-
+    # Clone the repository to a local directory
+    # repo = git.Repo.clone_from('https://github.com/malpani2003/Dummy-app.git', '/home/Pranav2003/Dummy-app')
+    # Fetch and merge the latest changes from the remote repository
+    repo.remotes.origin.fetch()
+    repo.remotes.origin.pull()
+    # Restart the server to apply the changes
+    # Replace this line with code to restart your specific server
+    return 'Server updated successfully', 200
 
 # By default route requets are GET in nature
 @app.route("/")
