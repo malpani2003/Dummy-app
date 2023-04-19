@@ -58,8 +58,10 @@ def webhook():
     # Clone the repository to a local directory
     # repo = git.Repo.clone_from('https://github.com/malpani2003/Dummy-app.git', '/home/Pranav2003/Dummy-app')
     # Fetch and merge the latest changes from the remote repository
+    repo.git.stash()
     repo.remotes.origin.fetch()
     repo.remotes.origin.pull()
+    repo.git.stash('apply')
     # Restart the server to apply the changes
     # Replace this line with code to restart your specific server
     return 'Server updated successfully', 200
@@ -67,7 +69,7 @@ def webhook():
 # By default route requets are GET in nature
 @app.route("/")
 def home():
-    return jsonify("Hello , Pranav Malpani Here")
+    return jsonify("Hello")
 
 # / is the index route or home route
 @app.route("/store",methods=["POST"])
